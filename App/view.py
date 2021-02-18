@@ -90,25 +90,24 @@ while True:
         print("Cargando información de los archivos ....")
         catalog = initCatalog()
         loadData(catalog)
-        print('Libros cargados: ' + str(lt.size(catalog['videos'])))
-        print('Autores cargados: ' + str(lt.size(catalog['authors'])))
-        print('Géneros cargados: ' + str(lt.size(catalog['tags'])))
-        print('Asociación de Géneros a videos cargados: ' +
-              str(lt.size(catalog['book_tags'])))
+        print('Titulos cargados: ' + str(lt.size(catalog['title'])))
+
+        
+        print('Nomres de canales cargados: ' str(lt.size(cataog['channel title'])))
     elif int(inputs[0]) == 2:
         number = input("Buscando los TOP ?: ")
-        books = controller.getBestBooks(catalog, int(number))
-        printBestBooks(books)
+        books = controller.getBestVideos(catalog, int(number))
+        printBestVideos(books)
 
     elif int(inputs[0]) == 3:
-        authorname = input("Nombre del autor a buscar: ")
-        author = controller.getBooksByAuthor(catalog, authorname)
+        authorname = input("Nombre del pais a buscar: ")
+        author = controller.getVideosByCountry(catalog, authorname)
         printAuthorData(author)
 
     elif int(inputs[0]) == 4:
-        label = input("Etiqueta a buscar: ")
-        book_count = controller.countBooksByTag(catalog, label)
-        print('Se encontraron: ', book_count, ' Libros')
+        category = input("Etiqueta a buscar: ")
+        book_count = controller.getVideosByCategory(catalog, category)
+        print('Se encontraron: ', book_count, ' videos')
 
     else:
         sys.exit(0)
