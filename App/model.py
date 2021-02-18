@@ -82,7 +82,7 @@ def addVideo(catalog, video):
     # Cada autor, se crea en la lista de libros del catalogo, y se
     # crea un libro en la lista de dicho autor (apuntador al libro)
     for channel_title in channel_titles:
-        addChannel(catalog, author.strip(), book)
+        addChannel(catalog, channel_title.strip(), video)
 
 def addChannel(catalog, channelname, video):
     """
@@ -96,14 +96,13 @@ def addChannel(catalog, channelname, video):
     else:
         channel = newChannel(channelname)
         lt.addLast(channels, channel)
-    lt.addLast(author['books'], book)
+    lt.addLast(channel['videos'], video)
 
 
 def addID(catalog, id):
     """compareratings
     Adiciona un tag a la lista de tags
-    """
-    t = newID(id['name'], id['id'])
+    """channelname
     lt.addLast(catalog['category_id'], t)
 
 # Funciones para creacion de datos
