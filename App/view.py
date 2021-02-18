@@ -66,15 +66,15 @@ def printAuthorData(author):
         print('No se encontro el autor')
 
 
-def printBestBooks(books):
-    size = lt.size(books)
+def printBestVideos(videos):
+    size = lt.size(videos)
     if size:
-        print(' Estos son los mejores libros: ')
-        for book in lt.iterator(books):
-            print('Titulo: ' + book['title'] + '  ISBN: ' +
-                  book['isbn'] + ' Rating: ' + book['average_rating'])
+        print(' Estos son los mejores videos: ')
+        for videos in lt.iterator(videos):
+            print('Titulo: ' + videos['title'] + '  ISBN: ' +
+                  video['isbn'] + ' Rating: ' + video['average_rating'])
     else:
-        print('No se encontraron libros')
+        print('No se encontraron videos')
 
 
 catalog = None
@@ -89,10 +89,10 @@ while True:
         print("Cargando información de los archivos ....")
         catalog = initCatalog()
         loadData(catalog)
-        print('Libros cargados: ' + str(lt.size(catalog['books'])))
+        print('Libros cargados: ' + str(lt.size(catalog['videos'])))
         print('Autores cargados: ' + str(lt.size(catalog['authors'])))
         print('Géneros cargados: ' + str(lt.size(catalog['tags'])))
-        print('Asociación de Géneros a Libros cargados: ' +
+        print('Asociación de Géneros a videos cargados: ' +
               str(lt.size(catalog['book_tags'])))
     elif int(inputs[0]) == 2:
         number = input("Buscando los TOP ?: ")
