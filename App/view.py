@@ -41,6 +41,7 @@ def printMenu():
     print("3- Consultar los videos de un autor")
     print("4- Consultar videos por género")
     print("0. Salir")
+    
 def initCatalog():
     """
     Inicializa el catalogo de libros
