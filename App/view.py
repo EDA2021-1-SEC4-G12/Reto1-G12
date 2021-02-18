@@ -37,7 +37,8 @@ operación solicitada
 def printMenu():
     print("Bienvenido")
     print("1- Cargar información en el catálogo")
-    print("2- ")
+    print("2- Consultar los videos de un autor")
+    print("3- Consultar videos por género")
 
 catalog = None
 
