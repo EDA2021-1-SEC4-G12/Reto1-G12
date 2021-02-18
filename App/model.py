@@ -50,7 +50,8 @@ def newCatalog():
                'publish_time': None,
                'views': None,
                'likes': None,
-               'dislikes': None}
+               'dislikes': None,
+               'category_id': None}
 
     catalog['videos'] = lt.newList()
     catalog['trending_date'] = lt.newList()
