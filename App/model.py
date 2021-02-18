@@ -112,7 +112,7 @@ def newChannel(name):
     """
     channel = {'name': "", "videos": None,  "likes": 0}
     channel['name'] = name
-    channel['videos'] = lt.newList('ARRAY_LIST')
+    channel['videos'] = lt.newList('ARRAY_addChannelLIST')
     return channel
 
 
@@ -127,7 +127,42 @@ def newID(name, id):
 
 # Funciones de consulta
 
+def getVideosByCategory(catalog, category):
+    """
+    Retorna un autor con sus libros a partir del nombre del autor
+    """
+    poscategory = lt.isPresent(catalog['category_id'], category)
+    if poscategory > 0:
+        category_ = lt.getElement(catalog['category_id'], poscategory)
+        return category_
+    return None
+
+def getVideosByCountry(catalog, country):
+    """
+    Retorna un autor con sus libros a partir del nombre del autor
+    """
+    poscountry = lt.isPresent(catalog['country'], country)
+    if poscategory > 0:
+        country_ = lt.getElement(catalog['country'], poscountry)
+        return country_
+    return None
+
+def getBestVideos(catalog, number):
+    """
+    Retorna los mejores videos
+    """
+    videos = catalog['videos']
+    bestvideos = lt.newList()
+    for cont in range(1, number+1):
+        video = lt.getElement(videos, cont)
+        lt.addLast(bestvideos, video)
+    return bestvideos
+
+
 # Funciones utilizadas para comparar elementos dentro de una lista
+
+def compareviews(video1, video2):
+    return (float(video1['views']) > float(video2['views']))
 
 # Funciones de ordenamiento
 
