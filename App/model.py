@@ -61,6 +61,7 @@ def newCatalog():
                                     cmpfunction=compareviews)
     catalog['likes'] = lt.newList()
     catalog['dislikes'] = lt.newList()
+    catalog['category_id'] = lt.newList()
 
     return catalog
 
@@ -100,8 +101,8 @@ def addID(catalog, id):
     """compareratings
     Adiciona un tag a la lista de tags
     """
-    t = newID(id['name'], tagid['id'])
-    lt.addLast(catalog['ids'], t)
+    t = newID(id['name'], id['id'])
+    lt.addLast(catalog['category_id'], t)
 
 # Funciones para creacion de datos
 
