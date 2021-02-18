@@ -56,26 +56,26 @@ def loadData(catalog):
     controller.loadData(catalog)
 
 
-def printAuthorData(author):
-    if author:
-        print('Autor encontrado: ' + author['name'])
-        print('Promedio: ' + str(author['average_rating']))
-        print('Total de libros: ' + str(lt.size(author['books'])))
-        for book in lt.iterator(author['books']):
-            print('Titulo: ' + book['title'] + '  ISBN: ' + book['isbn'])
-    else:
-        print('No se encontro el autor')
+# def printAuthorData(author):
+#     if author:
+#         print('Autor encontrado: ' + author['name'])
+#         print('Promedio: ' + str(author['average_rating']))
+#         print('Total de libros: ' + str(lt.size(author['books'])))
+#         for book in lt.iterator(author['books']):
+#             print('Titulo: ' + book['title'] + '  ISBN: ' + book['isbn'])
+#     else:
+#         print('No se encontro el autor')1
 
 
-def printBestVideos(videos):
-    size = lt.size(videos)
-    if size:
-        print(' Estos son los mejores videos: ')
-        for videos in lt.iterator(videos):
-            print('Titulo: ' + videos['title'] + '  ISBN: ' +
-                  video['isbn'] + ' Rating: ' + video['average_rating'])
-    else:
-        print('No se encontraron videos')
+# def printBestVideos(videos):
+#     size = lt.size(videos)
+#     if size:
+#         print(' Estos son los mejores videos: ')
+#         for videos in lt.iterator(videos):
+#             print('Titulo: ' + videos['title'] + '  ISBN: ' +
+#                   video['isbn'] + ' Rating: ' + video['average_rating'])
+#     else:
+#         print('No se encontraron videos')
 
 
 catalog = None
@@ -93,15 +93,15 @@ while True:
         print('Titulos cargados: ' + str(lt.size(catalog['title'])))
 
         
-        print('Nombres de canales cargados: ' + str(lt.size(cataog['channel title'])))
+        print('Nombres de canales cargados: ' + str(lt.size(cataog['channel_title'])))
     elif int(inputs[0]) == 2:
         number = input("Buscando los TOP ?: ")
-        books = controller.getBestVideos(catalog, int(number))
-        printBestVideos(books)
+        videos = controller.getBestVideos(catalog, int(number))
+        printBestVideos(videos)
 
     elif int(inputs[0]) == 3:
-        authorname = input("Nombre del pais a buscar: ")
-        author = controller.getVideosByCountry(catalog, authorname)
+        channel_title = input("Nombre del pais a buscar: ")
+        author = controller.getVideosByCountry(catalog, channel_title)
         printAuthorData(author)
 
     elif int(inputs[0]) == 4:

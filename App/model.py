@@ -84,13 +84,14 @@ def addVideo(catalog, video):
     for channel_title in channel_titles:
         addChannel(catalog, channel_title.strip(), video)
 
+
 def addChannel(catalog, channelname, video):
     """
     Adiciona un autor a lista de autores, la cual guarda referencias
     a los libros de dicho autor
     """
     channels = catalog['channel_title']
-    poschannel = lt.isPresent(channels, channelname)
+    poschannel = lt.isPresent(channels, channelname)  # No entiendo esta vaina no sirve
     if poschannel > 0:
         channel = lt.getElement(channels, poschannel)
     else:
