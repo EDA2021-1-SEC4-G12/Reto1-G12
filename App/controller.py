@@ -78,3 +78,26 @@ def sortVideos(catalog):
 
 
 # Funciones de consulta sobre el catálogo
+
+def getVideosByCategory(catalog, category):
+    """
+    Retrona los videos de una categoria
+    """
+    category = model.getVideosByCategory(catalog, category)
+    return category
+
+
+def getVideosByCountry(catalog, country):
+    """
+    Retrona los videos de un pais trending
+    """
+    country = model.getVideosByCountry(catalog, country)
+    return country
+
+
+def getBestVideos(catalog, number):
+    """
+    Retorna los mejores videos
+    """
+    bestvideos = model.getBestVideos(catalog, number)
+    return bestvideos
