@@ -41,6 +41,41 @@ def printMenu():
     print("3- Consultar los videos de un autor")
     print("4- Consultar videos por género")
     print("0. Salir")
+def initCatalog():
+    """
+    Inicializa el catalogo de libros
+    """
+    return controller.initCatalog()
+
+
+def loadData(catalog):
+    """
+    Carga los libros en la estructura de datos
+    """
+    controller.loadData(catalog)
+
+
+def printAuthorData(author):
+    if author:
+        print('Autor encontrado: ' + author['name'])
+        print('Promedio: ' + str(author['average_rating']))
+        print('Total de libros: ' + str(lt.size(author['books'])))
+        for book in lt.iterator(author['books']):
+            print('Titulo: ' + book['title'] + '  ISBN: ' + book['isbn'])
+    else:
+        print('No se encontro el autor')
+
+
+def printBestBooks(books):
+    size = lt.size(books)
+    if size:
+        print(' Estos son los mejores libros: ')
+        for book in lt.iterator(books):
+            print('Titulo: ' + book['title'] + '  ISBN: ' +
+                  book['isbn'] + ' Rating: ' + book['average_rating'])
+    else:
+        print('No se encontraron libros')
+
 
 catalog = None
 
@@ -52,9 +87,27 @@ while True:
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
         print("Cargando información de los archivos ....")
-
+        catalog = initCatalog()
+        loadData(catalog)
+        print('Libros cargados: ' + str(lt.size(catalog['books'])))
+        print('Autores cargados: ' + str(lt.size(catalog['authors'])))
+        print('Géneros cargados: ' + str(lt.size(catalog['tags'])))
+        print('Asociación de Géneros a Libros cargados: ' +
+              str(lt.size(catalog['book_tags'])))
     elif int(inputs[0]) == 2:
-        pass
+        number = input("Buscando los TOP ?: ")
+        books = controller.getBestBooks(catalog, int(number))
+        printBestBooks(books)
+
+    elif int(inputs[0]) == 3:
+        authorname = input("Nombre del autor a buscar: ")
+        author = controller.getBooksByAuthor(catalog, authorname)
+        printAuthorData(author)
+
+    elif int(inputs[0]) == 4:
+        label = input("Etiqueta a buscar: ")
+        book_count = controller.countBooksByTag(catalog, label)
+        print('Se encontraron: ', book_count, ' Libros')
 
     else:
         sys.exit(0)
