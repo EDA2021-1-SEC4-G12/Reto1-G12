@@ -79,7 +79,7 @@ def sortVideos(catalog):
 
 # Funciones de consulta sobre el catálogo
 
-def getVideosByCategory(catalog, category):
+def getVideosByCategory(catalog, category):channelname
     """
     Retrona los videos de una categoria
     """
