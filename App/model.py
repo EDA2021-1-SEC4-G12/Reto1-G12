@@ -102,7 +102,7 @@ def addChannel(catalog, channelname, video):
 def addID(catalog, id):
     """compareratings
     Adiciona un tag a la lista de tags
-    """channelname
+    """
     lt.addLast(catalog['category_id'], t)
 
 # Funciones para creacion de datos
