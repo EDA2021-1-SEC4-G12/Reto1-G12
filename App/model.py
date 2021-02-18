@@ -78,6 +78,7 @@ def addVideo(catalog, video):
     views = video['views'].split(",")
     likes = video['likes'].split(",")
     dislikes = video['dislikes'].split(",")
+    category_id = video['category_id'].split(",")
     # Cada autor, se crea en la lista de libros del catalogo, y se
     # crea un libro en la lista de dicho autor (apuntador al libro)
     for channel_title in channel_titles:
