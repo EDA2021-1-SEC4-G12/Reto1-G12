@@ -25,9 +25,6 @@ import model
 import csv
 
 
-"""
-El controlador se encarga de mediar entre la vista y el modelo.
-"""
 
 # Inicialización del Catálogo de libros
 def initCatalog():
@@ -79,7 +76,7 @@ def sortVideos(catalog):
 
 # Funciones de consulta sobre el catálogo
 
-def getVideosByCategory(catalog, category):channelname
+def getVideosByCategory(catalog, category):
     """
     Retrona los videos de una categoria
     """
