@@ -42,11 +42,11 @@ def printMenu():
     print("4- Consultar videos por género")
     print("0. Salir")
     
-def initCatalog():
+def initCatalog(input_type):
     """
     Inicializa el catalogo de libros
     """
-    return controller.initCatalog()
+    return controller.initCatalog(input_type)
 
 
 def loadData(catalog):
@@ -75,7 +75,7 @@ def loadData(catalog):
 #             print('Titulo: ' + videos['title'] + '  ISBN: ' +
 #                   video['isbn'] + ' Rating: ' + video['average_rating'])
 #     else:
-#         print('No se encontraron videos')
+#         print('No se encontraron videos')1
 
 
 catalog = None
@@ -87,13 +87,16 @@ while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
+        input_type = input('Tipo de list (ARRAY_LIST o SINGLE_LINKED) \n')
         print("Cargando información de los archivos ....")
-        catalog = initCatalog()
+        catalog = initCatalog(input_type)
         loadData(catalog)
-        print('Titulos cargados: ' + str(lt.size(catalog['title'])))
+        print('Videos cargados: ' + str(lt.size(catalog['videos'])))
+        print(catalog['videos'])
 
         
         print('Nombres de canales cargados: ' + str(lt.size(catalog['channel_title'])))
+    
     elif int(inputs[0]) == 2:
         number = input("Buscando los TOP ?: ")
         videos = controller.getBestVideos(catalog, int(number))

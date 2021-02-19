@@ -36,19 +36,22 @@ los mismos.
 """
 
 # Construccion de modelos
-def newCatalog():
+def newCatalog(type_list='SINGLE_LINKED'):
     """
     Inicializa el catálogo de libros. Crea una lista vacia para guardar
     todos los libros, adicionalmente, crea una lista vacia para los autores,
     una lista vacia para los generos y una lista vacia para la asociación
     generos y libros. Retorna el catalogo inicializado.
     """
+    if type_list != 'SINGLE_LINKED' and type_list != 'ARRAY_LIST':
+        print('Invalid type')
+
     catalog = {'videos':None,
                'category_id': None}
 
-    catalog['videos'] = lt.newList('SINGLE_LINKED',
+    catalog['videos'] = lt.newList(type_list,
                                     cmpfunction=compareviews)
-    catalog['category_id'] = lt.newList()
+    catalog['category_id'] = lt.newList(type_list)
 
     return catalog
 
