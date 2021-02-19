@@ -42,11 +42,11 @@ def printMenu():
     print("4- Consultar videos por género")
     print("0. Salir")
     
-def initCatalog(input_type):
+def initCatalog(input_type_list):
     """
     Inicializa el catalogo de libros
     """
-    return controller.initCatalog(input_type)
+    return controller.initCatalog(input_type_list)
 
 
 def loadData(catalog):
@@ -87,9 +87,9 @@ while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
-        input_type = input('Tipo de list (ARRAY_LIST o SINGLE_LINKED) \n')
+        input_type_list = input('Tipo de list (ARRAY_LIST o SINGLE_LINKED) \n')
         print("Cargando información de los archivos ....")
-        catalog = initCatalog(input_type)
+        catalog = initCatalog(input_type_list)
         loadData(catalog)
         print('Videos cargados: ' + str(lt.size(catalog['videos'])))
         print(catalog['videos'])
