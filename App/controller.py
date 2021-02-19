@@ -27,11 +27,11 @@ import csv
 
 
 # Inicialización del Catálogo de libros
-def initCatalog():
+def initCatalog(type_list):
     """
     Llama la funcion de inicializacion del catalogo del modelo.
     """
-    catalog = model.newCatalog()
+    catalog = model.newCatalog(type_list)
     return catalog
 
 # Funciones para la carga de datos
