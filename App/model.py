@@ -44,24 +44,10 @@ def newCatalog():
     generos y libros. Retorna el catalogo inicializado.
     """
     catalog = {'videos':None,
-               'trending_date': None,
-               'title': None,
-               'channel_title': None,
-               'publish_time': None,
-               'views': None,
-               'likes': None,
-               'dislikes': None,
                'category_id': None}
 
-    catalog['videos'] = lt.newList()
-    catalog['trending_date'] = lt.newList()
-    catalog['title'] = lt.newList()
-    catalog['channel_title'] = lt.newList()
-    catalog['publish_time'] = lt.newList()
-    catalog['views'] = lt.newList('SINGLE_LINKED',
+    catalog['videos'] = lt.newList('SINGLE_LINKED',
                                     cmpfunction=compareviews)
-    catalog['likes'] = lt.newList()
-    catalog['dislikes'] = lt.newList()
     catalog['category_id'] = lt.newList()
 
     return catalog
@@ -71,40 +57,30 @@ def newCatalog():
 def addVideo(catalog, video):
     lt.addLast(catalog['videos'], video)
     # Se obtienen los autores del libro
-    trending_dates = video['trending_date'].split(",")
-    titles = video['title'].split(",")
-    channel_titles = video['channel_title'].split(",")
-    publish_times = video['publish_time'].split(",")
-    views = video['views'].split(",")
-    likes = video['likes'].split(",")
-    dislikes = video['dislikes'].split(",")
-    category_id = video['category_id'].split(",")
     # Cada autor, se crea en la lista de libros del catalogo, y se
     # crea un libro en la lista de dicho autor (apuntador al libro)
-    for channel_title in channel_titles:
-        addChannel(catalog, channel_title.strip(), video)
 
 
-def addChannel(catalog, channelname, video):
-    """
-    Adiciona un autor a lista de autores, la cual guarda referencias
-    a los libros de dicho autor
-    """
-    channels = catalog['channel_title']
-    poschannel = lt.isPresent(channels, channelname)  # No entiendo esta vaina no sirve
-    if poschannel > 0:
-        channel = lt.getElement(channels, poschannel)
-    else:
-        channel = newChannel(channelname)
-        lt.addLast(channels, channel)
-    lt.addLast(channel['videos'], video)
+# def addChannel(catalog, channelname, video):
+#     """
+#     Adiciona un autor a lista de autores, la cual guarda referencias
+#     a los libros de dicho autor
+#     """
+#     channels = catalog['channel_title']
+#     poschannel = lt.isPresent(channels, channelname)  # No entiendo esta vaina no sirve
+#     if poschannel > 0:
+#         channel = lt.getElement(channels, poschannel)
+#     else:
+#         channel = newChannel(channelname)
+#         lt.addLast(channels, channel)
+#     lt.addLast(channel['videos'], video)
 
 
 def addID(catalog, id):
     """compareratings
     Adiciona un tag a la lista de tags
     """
-    lt.addLast(catalog['category_id'], t)
+    lt.addLast(catalog['category_id'], id)
 
 # Funciones para creacion de datos
 
