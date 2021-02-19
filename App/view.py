@@ -93,7 +93,7 @@ while True:
         print('Titulos cargados: ' + str(lt.size(catalog['title'])))
 
         
-        print('Nombres de canales cargados: ' + str(lt.size(cataog['channel_title'])))
+        print('Nombres de canales cargados: ' + str(lt.size(catalog['channel_title'])))
     elif int(inputs[0]) == 2:
         number = input("Buscando los TOP ?: ")
         videos = controller.getBestVideos(catalog, int(number))
