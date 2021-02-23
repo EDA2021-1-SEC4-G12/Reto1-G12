@@ -92,11 +92,7 @@ while True:
         catalog = initCatalog(input_type_list)
         loadData(catalog)
         print('Videos cargados: ' + str(lt.size(catalog['videos'])))
-        print(catalog['videos'])
-
-        
-        print('Nombres de canales cargados: ' + str(lt.size(catalog['channel_title'])))
-    
+            
     elif int(inputs[0]) == 2:
         number = input("Buscando los TOP ?: ")
         videos = controller.getBestVideos(catalog, int(number))
@@ -105,7 +101,7 @@ while True:
     elif int(inputs[0]) == 3:
         channel_title = input("Nombre del pais a buscar: ")
         author = controller.getVideosByCountry(catalog, channel_title)
-        printAuthorData(author)
+        printCountryData(author)
 
     elif int(inputs[0]) == 4:
         category = input("Etiqueta a buscar: ")

@@ -50,7 +50,7 @@ def newCatalog(type_list='SINGLE_LINKED'):
                'category_id': None}
 
     catalog['videos'] = lt.newList(type_list,
-                                    cmpfunction=compareviews)
+                                    cmpfunction=cmpVideosByViews)
     catalog['category_id'] = lt.newList(type_list)
 
     return catalog
@@ -124,7 +124,7 @@ def getVideosByCountry(catalog, country):
     Retorna un autor con sus libros a partir del nombre del autor
     """
     poscountry = lt.isPresent(catalog['country'], country)
-    if poscategory > 0:
+    if poscountry > 0:
         country_ = lt.getElement(catalog['country'], poscountry)
         return country_
     return None
@@ -143,8 +143,14 @@ def getBestVideos(catalog, number):
 
 # Funciones utilizadas para comparar elementos dentro de una lista
 
-def compareviews(video1, video2):
-    return (float(video1['views']) > float(video2['views']))
+def cmpVideosByViews(video1,video2):
+    """
+    Devuelve verdadero (True) si los 'views' de video1 son menores que los del video2
+    Args:
+        video1: informacion del primer video que incluye su valor 'views'
+        video2: informacion del segundo video que incluye su valor 'views'
+    """
+    return (float(video1['views']) < float(video2['views']))
 
 # Funciones de ordenamiento
 
