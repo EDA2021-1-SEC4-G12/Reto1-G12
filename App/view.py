@@ -37,8 +37,8 @@ operación solicitada
 def printMenu():
     print("Bienvenido")
     print("1- Cargar información en el catálogo")
-    print("2- Consultar los Top videos por promedio")
-    print("3- Consultar los videos de un autor")
+    print("2- Consultar los Top videos por views")
+    print("3- Consultar los videos de un canal")
     print("4- Consultar videos por género")
     print("0. Salir")
     
@@ -77,6 +77,16 @@ def loadData(catalog):
 #     else:
 #         print('No se encontraron videos')1
 
+def printResults(ord_videos, sample=10):
+    size = lt.size(ord_videos)
+    if size > sample:
+        print("Los primeros ", sample, " videos ordenados son:")
+        i=0
+        while i <= sample:
+            videos = lt.getElement(ord_videos,i)
+            print('Trending date: ' + videos['trending_date'] + ' Title: ' + videos['title']
+                  + ' Channel: ' + videos['channel_title'] + ' Views: ' + videos['views'])
+            i+=1
 
 catalog = None
 
@@ -95,8 +105,10 @@ while True:
             
     elif int(inputs[0]) == 2:
         number = input("Buscando los TOP ?: ")
-        videos = controller.getBestVideos(catalog, int(number))
-        printBestVideos(videos)
+        input_sort_type = input('Tipo de algoritmo de ordenamiento iterativo (selection, insertion o shell) : ')
+        sortedVideos = controller.sortVideos(catalog, int(number), str(input_sort_type))
+        print('Para el top ' + str(number) + ' elementos (videos), el tiempo (mseg) es: ' + str(sortedVideos[0]))
+        #print(sortedVideos[1])
 
     elif int(inputs[0]) == 3:
         channel_title = input("Nombre del pais a buscar: ")
