@@ -33,13 +33,11 @@ def loadData(catalog):
     Carga los libros en la estructura de datos
     """
     controller.loadData(catalog)
-
-catalog = None
-
+    
 # Load data
 catalog = initCatalog(args.type_list)
 loadData(catalog)
-print('Videos cargados: ' + str(lt.size(catalog['videos']) + ' || ' + args.type_list))
+print('Videos cargados: ' + str(lt.size(catalog['videos'])) + ' || ' + str(args.type_list))
 
 # Sort videos
 
@@ -51,5 +49,3 @@ for sort_ in sort_types:
         sortedVideos = controller.sortVideos(catalog, sample_size_, sort_)
         print('Ordenando con: ' + sort_)
         print('Para el top ' + str(sample_size_) + ' elementos (videos), el tiempo (mseg) es: ' + str(sortedVideos[0]))
-
-
