@@ -17,8 +17,6 @@ import argparse
 parser = argparse.ArgumentParser(description='Testing sorts')
 
 parser.add_argument('--type_list', default='SINGLE_LINKED', type=str)
-parser.add_argument('--sample_size', default=10, type=int)
-parser.add_argument('--sort_type', default='selection', type=str)
 
 args = parser.parse_args()
 
@@ -41,11 +39,17 @@ catalog = None
 # Load data
 catalog = initCatalog(args.type_list)
 loadData(catalog)
-print('Videos cargados: ' + str(lt.size(catalog['videos'])))
+print('Videos cargados: ' + str(lt.size(catalog['videos']) + ' con ' + args.type_list))
 
-# Sort videos (TOCA HACER TODO ACA, DEPRONTO CON UN FOR)
-sortedVideos = controller.sortVideos(catalog, int(args.sample_size), str(args.sort_type))
-print('Ordenando con: ' + str(args.sort_type))
-print('Para el top ' + str(args.sample_size) + ' elementos (videos), el tiempo (mseg) es: ' + str(sortedVideos[0]))
+# Sort videos
+
+sort_types = ['selection','insertion','shell']
+sample_size = [1000,2000,4000,8000,16000,32000,64000]
+
+for sort_ in sort_types:
+    for sample_size_ in sample_size:
+        sortedVideos = controller.sortVideos(catalog, sample_size_, sort_)
+        print('Ordenando con: ' + sort_)
+        print('Para el top ' + str(sample_size_) + ' elementos (videos), el tiempo (mseg) es: ' + str(sortedVideos[0]))
 
 
