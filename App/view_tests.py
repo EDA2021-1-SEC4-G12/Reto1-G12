@@ -42,7 +42,7 @@ print('Videos cargados: ' + str(lt.size(catalog['videos'])) + ' || ' + str(args.
 # Sort videos
 
 sort_types = ['selection','insertion','shell']
-sample_size = [1000,2000,4000,8000,16000,32000,64000]
+sample_size = [1000,2000,4000,8000,16000,32000]
 
 for sort_ in sort_types:
     for sample_size_ in sample_size:
