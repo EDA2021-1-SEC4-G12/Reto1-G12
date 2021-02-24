@@ -39,7 +39,7 @@ catalog = None
 # Load data
 catalog = initCatalog(args.type_list)
 loadData(catalog)
-print('Videos cargados: ' + str(lt.size(catalog['videos']) + ' con ' + args.type_list))
+print('Videos cargados: ' + str(lt.size(catalog['videos']) + ' || ' + args.type_list))
 
 # Sort videos
 
