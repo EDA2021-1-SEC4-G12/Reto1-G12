@@ -84,41 +84,9 @@ catalog = initCatalog(args.type_list)
 loadData(catalog)
 print('Videos cargados: ' + str(lt.size(catalog['videos'])))
 
-# Sort videos
+# Sort videos (TOCA HACER TODO ACA, DEPRONTO CON UN FOR)
 sortedVideos = controller.sortVideos(catalog, int(args.sample_size), str(args.sort_type))
 print('Ordenando con: ' + str(args.sort_type))
 print('Para el top ' + str(args.sample_size) + ' elementos (videos), el tiempo (mseg) es: ' + str(sortedVideos[0]))
 
-"""
-Menu principal
-"""
-# while True:
-#     printMenu()
-#     inputs = input('Seleccione una opción para continuar\n')
-#     if int(inputs[0]) == 1:
-#         input_type_list = input('Tipo de list (ARRAY_LIST o SINGLE_LINKED) \n')
-#         print("Cargando información de los archivos ....")
-#         catalog = initCatalog(input_type_list)
-#         loadData(catalog)
-#         print('Videos cargados: ' + str(lt.size(catalog['videos'])))
-            
-#     elif int(inputs[0]) == 2:
-#         number = input("Buscando los TOP ?: ")
-#         input_sort_type = input('Tipo de algoritmo de ordenamiento iterativo (selection, insertion o shell) : ')
-#         sortedVideos = controller.sortVideos(catalog, int(number), str(input_sort_type))
-#         print('Para el top ' + str(number) + ' elementos (videos), el tiempo (mseg) es: ' + str(sortedVideos[0]))
-#         #print(sortedVideos[1])
 
-#     elif int(inputs[0]) == 3:
-#         channel_title = input("Nombre del pais a buscar: ")
-#         author = controller.getVideosByCountry(catalog, channel_title)
-#         printCountryData(author)
-
-#     elif int(inputs[0]) == 4:
-#         category = input("Etiqueta a buscar: ")
-#         book_count = controller.getVideosByCategory(catalog, category)
-#         print('Se encontraron: ', book_count, ' videos')
-
-#     else:
-#         sys.exit(0)
-sys.exit(0)
