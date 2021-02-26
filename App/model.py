@@ -28,8 +28,11 @@
 import config as cf
 import time
 from DISClib.ADT import list as lt
-from DISClib.Algorithms.Sorting import selectionsort, insertionsort, shellsort
+from DISClib.Algorithms.Sorting import selectionsort, insertionsort, shellsort, mergesort, quicksort
 assert cf
+
+
+
 
 """
 Se define la estructura de un catálogo de videos. El catálogo tendrá dos listas, una para los videos, otra para las categorias de
@@ -166,6 +169,10 @@ def sortVideos(catalog, size, sort_type):
         sorted_list = insertionsort.sort(sub_list, cmpVideosByViews)
     elif sort_type == 'shell':
         sorted_list = shellsort.sort(sub_list, cmpVideosByViews)
+    elif sort_type == 'merge':
+        sorted_list = mergesort.sort(sub_list, cmpVideosByViews)
+    elif sort_type == 'quick':
+        sorted_list = quicksort.sort(sub_list, cmpVideosByViews)
     else:
         print('Invalid sorting algorithm, try selection, insertion or shell')
     stop_time = time.process_time()
