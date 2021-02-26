@@ -54,8 +54,9 @@ def newCatalog(type_list='SINGLE_LINKED'):
                'category_id': None}
 
     catalog['videos'] = lt.newList(type_list,
-                                    cmpfunction=cmpVideosByViews)
-    catalog['category_id'] = lt.newList(type_list)
+                                    cmpfunction=cmpvideoid)
+    catalog['category_id'] = lt.newList(type_list,
+                                    cmpfunction=cmpcategoryid)
 
     return catalog
 
@@ -146,6 +147,17 @@ def getBestVideos(catalog, number):
 
 
 # Funciones utilizadas para comparar elementos dentro de una lista
+
+def cmpvideoid(video1,video2):
+    if (video1.lower() in video2['video_id'].lower()):
+        return 0
+    return -1
+
+def cmpcategoryid(id1,id2):
+    if (id1.lower() in id2['id'].lower()):
+        return 0
+    return
+
 
 def cmpVideosByViews(video1,video2):
     """
