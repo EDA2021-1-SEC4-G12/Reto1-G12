@@ -69,21 +69,6 @@ def addVideo(catalog, video):
     # crea un libro en la lista de dicho autor (apuntador al libro)
 
 
-# def addChannel(catalog, channelname, video):
-#     """
-#     Adiciona un autor a lista de autores, la cual guarda referencias
-#     a los libros de dicho autor
-#     """
-#     channels = catalog['channel_title']
-#     poschannel = lt.isPresent(channels, channelname)  # No entiendo esta vaina no sirve
-#     if poschannel > 0:
-#         channel = lt.getElement(channels, poschannel)
-#     else:
-#         channel = newChannel(channelname)
-#         lt.addLast(channels, channel)
-#     lt.addLast(channel['videos'], video)
-
-
 def addID(catalog, id):
     """compareratings
     Adiciona un tag a la lista de tags
