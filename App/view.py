@@ -43,7 +43,7 @@ def printMenu():
     print("1- Cargar información en el catálogo")
     print("2- Consultar los Top videos por views")
     print("3- Consultar los videos de un canal")
-    print("4- Consultar videos por género")
+    print("5- Consultar videos por género")
     print("0. Salir")
     
 def initCatalog(input_type_list):
@@ -114,7 +114,7 @@ while True:
         input_sort_type = 'merge'
         sortedVideos = controller.sortVideos(catalog, int(number), str(input_sort_type))
         print('Para el top ' + str(number) + ' elementos (videos), el tiempo (mseg) es: ' + str(sortedVideos[0]))
-        #print(sortedVideos[1])
+        prin
 
     elif int(inputs[0]) == 3:
         channel_title = input("Nombre del pais a buscar: ")
