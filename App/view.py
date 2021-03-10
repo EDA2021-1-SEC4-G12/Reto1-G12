@@ -101,7 +101,8 @@ while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
-        input_type_list = input('Tipo de list (ARRAY_LIST o SINGLE_LINKED) \n')
+        #input_type_list = input('Tipo de list (ARRAY_LIST o SINGLE_LINKED) \n')
+        input_type_list = 'ARRAY_LIST'
         print("Cargando información de los archivos ....")
         catalog = initCatalog(input_type_list)
         loadData(catalog)
@@ -109,7 +110,8 @@ while True:
             
     elif int(inputs[0]) == 2:
         number = input("Buscando los TOP ?: ")
-        input_sort_type = input('Tipo de algoritmo de ordenamiento iterativo (selection, insertion o shell) : ')
+        #input_sort_type = input('Tipo de algoritmo de ordenamiento iterativo (selection, insertion o shell) : ')
+        input_sort_type = 'merge'
         sortedVideos = controller.sortVideos(catalog, int(number), str(input_sort_type))
         print('Para el top ' + str(number) + ' elementos (videos), el tiempo (mseg) es: ' + str(sortedVideos[0]))
         #print(sortedVideos[1])
