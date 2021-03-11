@@ -234,15 +234,15 @@ def sortVideosLikes(catalog, size, sort_type):
     start_time = time.process_time()
     sorted_list = None
     if sort_type == 'selection':
-        sorted_list = selectionsort.sort(sub_list, cmpVideosByTime)
+        sorted_list = selectionsort.sort(sub_list, cmpVideosByLikes)
     elif sort_type == 'insertion':
-        sorted_list = insertionsort.sort(sub_list, cmpVideosByTime)
+        sorted_list = insertionsort.sort(sub_list, cmpVideosByLikes)
     elif sort_type == 'shell':
-        sorted_list = shellsort.sort(sub_list, cmpVideosByTime)
+        sorted_list = shellsort.sort(sub_list, cmpVideosByLikes)
     elif sort_type == 'merge':
-        sorted_list = mergesort.sort(sub_list, cmpVideosByTime)
+        sorted_list = mergesort.sort(sub_list, cmpVideosByLikes)
     elif sort_type == 'quick':
-        sorted_list = quicksort.sort(sub_list, cmpVideosByTime)
+        sorted_list = quicksort.sort(sub_list, cmpVideosByLikes)
     else:
         print('Invalid sorting algorithm, try selection, insertion or shell')
     stop_time = time.process_time()
