@@ -44,6 +44,9 @@ def printMenu():
     print("2- Consultar los Top videos por views")
     print("3- Consultar los videos de un canal")
     print("4- Consultar videos por género")
+    #videos tendencia por pais
+    #video tendencia por categoria
+    #videos con más Likes
     print("0. Salir")
     
 def initCatalog(input_type_list):
@@ -81,16 +84,17 @@ def loadData(catalog):
 #     else:
 #         print('No se encontraron videos')1
 
-def printResults(ord_videos, sample=10):
-    size = lt.size(ord_videos)
+def printResults(videos_orde):
+    size = lt.size(videos_orde)
     if size > sample:
         print("Los primeros ", sample, " videos ordenados son:")
         i=0
         while i <= sample:
-            videos = lt.getElement(ord_videos,i)
+            videos = lt.getElement(videos_orde,i)
             print('Trending date: ' + videos['trending_date'] + ' Title: ' + videos['title']
-                  + ' Channel: ' + videos['channel_title'] + ' Views: ' + videos['views'])
+                  + ' Channel: ' + videos['channel_title'] + 'publich time: ' + videos['publish_time'] + ' Views: ' + videos['views'] + 'likes: ' + videos['likes'] + 'dislikes: ' + videos['dislikes'])
             i+=1
+    return printResults
 
 catalog = None
 
@@ -101,17 +105,19 @@ while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
-        input_type_list = input('Tipo de list (ARRAY_LIST o SINGLE_LINKED) \n')
+        input_type_list = 'ARRAY_LIST'
         print("Cargando información de los archivos ....")
         catalog = initCatalog(input_type_list)
         loadData(catalog)
         print('Videos cargados: ' + str(lt.size(catalog['videos'])))
             
     elif int(inputs[0]) == 2:
-        number = input("Buscando los TOP ?: ")
-        input_sort_type = input('Tipo de algoritmo de ordenamiento iterativo (selection, insertion o shell) : ')
-        sortedVideos = controller.sortVideos(catalog, int(number), str(input_sort_type))
-        print('Para el top ' + str(number) + ' elementos (videos), el tiempo (mseg) es: ' + str(sortedVideos[0]))
+        number = int(input("Buscando los TOP ?: "))
+        
+        country_type = input('País a buscar: ')
+        category_type = int(input('Numero de categoria a buscar: ')) 
+        soVideos = controller.getVideosByCountryCat(catalog['videos'], country_type, category_type)
+        controller.printResult(soVideos, number)
         #print(sortedVideos[1])
 
     elif int(inputs[0]) == 3:
