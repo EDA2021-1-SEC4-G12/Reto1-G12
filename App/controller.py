@@ -114,6 +114,15 @@ def getVideosByCountryCat (catalog, country, category):
     return count
 
 
+<<<<<<< HEAD
+=======
+def getVideosByCountryCat (catalog, country, category):
+
+    count = model.getVideosByCatCoun (catalog, country, category)
+    return count
+
+
+>>>>>>> a4d89b5adc99fbf50e4311c033bf3ca95b653ae1
 def printResult (catalog, numbers):
     lista = []
     i = 0
