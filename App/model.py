@@ -171,7 +171,46 @@ def getBestVideos(catalog, number):
         lt.addLast(bestvideos, video)
     return bestvideos
 
+def getBestVideosCountry (catalog, number, country):
+    size = lt.size(catalog)
+    video = catalog['videos']
+    Best = lt.newlist()
+    if size > sample:
+        print("Los primeros ", sample, " videos ordenados son:")
+        i=0
+        while i <= sample:
+            videos = lt.getElement(catalog,i)
+            print('Trending date: ' + videos['trending_date'] + ' Title: ' + videos['title']
+                  + ' Channel: ' + videos['channel_title'] + 'publich time: ' + videos['publish_time'] + ' Views: ' + videos['views'] + 'likes: ' + videos['likes'] + 'dislikes: ' + videos['dislikes'])
+            i+=1
+            lt.addLast(Best,video)
+    return Best
 
+def getVideosByCountry(catalog, country):
+    lista = lt.newList("ARRAY_LIST")
+    i = 1
+    while i <= lt.size(catalog):
+        element = lt.getElement(catalog, i)
+        if element.get('country') == country:
+            lt.addLast(lista)
+        i += 1
+    return lista
+
+def getVideosByCategory(catalog, category):
+    lista = lt.newList("ARRAY_LIST")
+    i = 1
+    while i <= lt.size(catalog):
+        element = lt.getElement(catalog, i)
+        if element.get('category_id') == category:
+            lt.addLast(lista)
+        i += 1
+    return lista 
+
+def getVideosByCatCoun (catalog, country, category):
+    cat = getVideosByCategory (catalog, category)
+    coun = getVideosByCountry (cat, country)
+    resultado = sortVideos (coun, lt.size(coun), 'merge')
+    return resultado[1]
 # Funciones utilizadas para comparar elementos dentro de una lista
 
 def cmpvideoid(video1,video2):
@@ -219,7 +258,7 @@ def cmpVideosByTime(video1,video2):
 # Funciones de ordenamiento
 
 def sortVideos(catalog, size, sort_type):
-    sub_list = lt.subList(catalog['videos'], 0, size)
+    sub_list = lt.subList(catalog, 0, size)
     sub_list = sub_list.copy()
     start_time = time.process_time()
     sorted_list = None

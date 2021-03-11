@@ -23,7 +23,7 @@
 import config as cf
 import model
 import csv
-
+from DISClib.ADT import list as lt
 
 
 # Inicialización del Catálogo de libros
@@ -108,6 +108,20 @@ def getVideosByTags(catalog, tag):
     tagsVids = model.getVideosByTags(catalog, tag)
     return tagsVids
 
+def getVideosByCountryCat (catalog, country, category):
+
+    count = model.getVideosByCatCoun (catalog, country, category)
+    return count
+
+
+def printResult (catalog, numbers):
+    lista = []
+    i = 0
+    while i <=numbers :
+        elemento = lt.getElement(catalog, i)
+        lista.append(elemento)
+        i += 1
+    print(lista)
 
 # def getBestVideos(catalog, number):
 #     """
