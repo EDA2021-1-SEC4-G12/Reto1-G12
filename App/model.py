@@ -77,8 +77,6 @@ def addID(catalog, id):
     id_ = newID(id['id'],id['name'])
     lt.addLast(catalog['category_id'], id_)
 
-# def addCategoryID(catalog, video_id):
-#     id_ = newCategoryID(video_id['video'])
 
 # Funciones para creacion de datos
 
@@ -103,13 +101,6 @@ def newID(name, id):
     return id_
 
 
-# def newCategoryID(id_id, video_id):
-#     """
-#     Relacion libros con ID (categoria)
-#     """
-#     categoryid = {'id':id_id, 'video_id':video_id}
-#     return categoryid
-
 # Funciones de consulta
 
 def getVideosByCategory(catalog, category):
@@ -123,9 +114,7 @@ def getVideosByCategory(catalog, category):
         vals_id.append(elemt['name'])
         names_id.append(elemt['id'])
     dic_decode = dict(zip(names_id,vals_id))
-    #poscategory = lt.isPresent(categories['elements'], category)
     categoryVideos = lt.newList()
-    #if poscategory > 0:
     for v_i in range(catalog['videos']['size']):
         video_i = dict(lt.getElement(catalog['videos'],v_i))
         if int(video_i['category_id']) == int(dic_decode[category]):
@@ -171,46 +160,7 @@ def getBestVideos(catalog, number):
         lt.addLast(bestvideos, video)
     return bestvideos
 
-def getBestVideosCountry (catalog, number, country):
-    size = lt.size(catalog)
-    video = catalog['videos']
-    Best = lt.newlist()
-    if size > sample:
-        print("Los primeros ", sample, " videos ordenados son:")
-        i=0
-        while i <= sample:
-            videos = lt.getElement(catalog,i)
-            print('Trending date: ' + videos['trending_date'] + ' Title: ' + videos['title']
-                  + ' Channel: ' + videos['channel_title'] + 'publich time: ' + videos['publish_time'] + ' Views: ' + videos['views'] + 'likes: ' + videos['likes'] + 'dislikes: ' + videos['dislikes'])
-            i+=1
-            lt.addLast(Best,video)
-    return Best
 
-def getVideosByCountry(catalog, country):
-    lista = lt.newList("ARRAY_LIST")
-    i = 1
-    while i <= lt.size(catalog):
-        element = lt.getElement(catalog, i)
-        if element.get('country') == country:
-            lt.addLast(lista)
-        i += 1
-    return lista
-
-def getVideosByCategory(catalog, category):
-    lista = lt.newList("ARRAY_LIST")
-    i = 1
-    while i <= lt.size(catalog):
-        element = lt.getElement(catalog, i)
-        if element.get('category_id') == category:
-            lt.addLast(lista)
-        i += 1
-    return lista 
-
-def getVideosByCatCoun (catalog, country, category):
-    cat = getVideosByCategory (catalog, category)
-    coun = getVideosByCountry (cat, country)
-    resultado = sortVideos (coun, lt.size(coun), 'merge')
-    return resultado[1]
 # Funciones utilizadas para comparar elementos dentro de una lista
 
 def cmpvideoid(video1,video2):
