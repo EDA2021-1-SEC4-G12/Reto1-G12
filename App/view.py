@@ -23,7 +23,10 @@
 import config as cf
 import sys
 import controller
+<<<<<<< HEAD
 import datetime
+=======
+>>>>>>> a4d89b5adc99fbf50e4311c033bf3ca95b653ae1
 from DISClib.ADT import list as lt
 assert cf
 
@@ -44,16 +47,22 @@ def printMenu():
     print("1- Cargar información en el catálogo")
     print("2- Consultar los Top videos por views")
 <<<<<<< HEAD
+<<<<<<< HEAD
     print("3- Consultar los Top videos por views, categoría y país")
     print("4- Consultar video más trending para país")
     print("5- Consultar video más trending para categoría")
     print("6- Consultar los Top videos por país con tags")
 =======
+=======
+>>>>>>> a4d89b5adc99fbf50e4311c033bf3ca95b653ae1
     print("3- Consultar los videos de un canal")
     print("4- Consultar videos por género")
     #videos tendencia por pais
     #video tendencia por categoria
     #videos con más Likes
+<<<<<<< HEAD
+>>>>>>> a4d89b5adc99fbf50e4311c033bf3ca95b653ae1
+=======
 >>>>>>> a4d89b5adc99fbf50e4311c033bf3ca95b653ae1
     print("0. Salir")
     
@@ -71,6 +80,7 @@ def loadData(catalog):
     controller.loadData(catalog)
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 def printTop(ord_videos, sample=10):
     size = lt.size(ord_videos)
@@ -121,6 +131,8 @@ def printCategoryCountry(videos_selected, sample, category, country):
             i+=1
     return printResults
 =======
+=======
+>>>>>>> a4d89b5adc99fbf50e4311c033bf3ca95b653ae1
 # def printAuthorData(author):
 #     if author:
 #         print('Autor encontrado: ' + author['name'])
@@ -153,6 +165,9 @@ def printResults(videos_orde):
                   + ' Channel: ' + videos['channel_title'] + 'publich time: ' + videos['publish_time'] + ' Views: ' + videos['views'] + 'likes: ' + videos['likes'] + 'dislikes: ' + videos['dislikes'])
             i+=1
     return printResults
+<<<<<<< HEAD
+>>>>>>> a4d89b5adc99fbf50e4311c033bf3ca95b653ae1
+=======
 >>>>>>> a4d89b5adc99fbf50e4311c033bf3ca95b653ae1
 
 catalog = None
@@ -172,12 +187,15 @@ while True:
             
     elif int(inputs[0]) == 2:
 <<<<<<< HEAD
+<<<<<<< HEAD
         number = input("Buscando los TOP ?: ")
         input_sort_type = 'merge'
         sortedVideos = controller.sortVideos(catalog, int(number), str(input_sort_type))
         #print('Para el top ' + str(number) + ' elementos (videos), el tiempo (mseg) es: ' + str(sortedVideos[0]))
         printTop(sortedVideos[1], int(number))
 =======
+=======
+>>>>>>> a4d89b5adc99fbf50e4311c033bf3ca95b653ae1
         number = int(input("Buscando los TOP ?: "))
         
         country_type = input('País a buscar: ')
@@ -185,6 +203,7 @@ while True:
         soVideos = controller.getVideosByCountryCat(catalog['videos'], country_type, category_type)
         controller.printResult(soVideos, number)
         #print(sortedVideos[1])
+<<<<<<< HEAD
 >>>>>>> a4d89b5adc99fbf50e4311c033bf3ca95b653ae1
 
     elif int(inputs[0]) == 3:
@@ -218,6 +237,18 @@ while True:
         tagsVideos = controller.getVideosByTags(catalog, tag)
         sortedVideosLikes = controller.sortVideosLikes(categoryVideos, int(3), str(input_sort_type))
 
+=======
+
+    elif int(inputs[0]) == 3:
+        channel_title = input("Nombre del pais a buscar: ")
+        author = controller.getVideosByCountry(catalog, channel_title)
+        printCountryData(author)
+
+    elif int(inputs[0]) == 4:
+        category = input("Etiqueta a buscar: ")
+        book_count = controller.getVideosByCategory(catalog, category)
+        print('Se encontraron: ', book_count, ' videos')
+>>>>>>> a4d89b5adc99fbf50e4311c033bf3ca95b653ae1
 
     else:
         sys.exit(0)

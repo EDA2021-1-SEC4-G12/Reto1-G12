@@ -72,6 +72,7 @@ def sortVideos(catalog, size, sort_type):
     """
     return model.sortVideos(catalog, size, sort_type)
 
+<<<<<<< HEAD
 def sortVideosTime(catalog, size, sort_type):
     """
     Ordena los videos por views
@@ -116,12 +117,35 @@ def getVideosByCountryCat (catalog, country, category):
 
 <<<<<<< HEAD
 =======
+=======
+
+# Funciones de consulta sobre el catálogo
+
+# def getVideosByCategory(catalog, category):
+#     """
+#     Retrona los videos de una categoria
+#     """
+#     category = model.getVideosByCategory(catalog, category)
+#     return category
+
+
+# def getVideosByCountry(catalog, country):
+#     """
+#     Retrona los videos de un pais trending
+#     """
+#     country = model.getVideosByCountry(catalog, country)
+#     return country
+
+>>>>>>> a4d89b5adc99fbf50e4311c033bf3ca95b653ae1
 def getVideosByCountryCat (catalog, country, category):
 
     count = model.getVideosByCatCoun (catalog, country, category)
     return count
 
 
+<<<<<<< HEAD
+>>>>>>> a4d89b5adc99fbf50e4311c033bf3ca95b653ae1
+=======
 >>>>>>> a4d89b5adc99fbf50e4311c033bf3ca95b653ae1
 def printResult (catalog, numbers):
     lista = []
