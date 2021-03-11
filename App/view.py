@@ -23,6 +23,7 @@
 import config as cf
 import sys
 import controller
+import datetime
 from DISClib.ADT import list as lt
 assert cf
 
@@ -42,8 +43,10 @@ def printMenu():
     print("Bienvenido")
     print("1- Cargar información en el catálogo")
     print("2- Consultar los Top videos por views")
-    print("3- Consultar los videos de un canal")
-    print("5- Consultar videos por género")
+    print("3- Consultar los Top videos por views, categoría y país")
+    print("4- Consultar video más trending para país")
+    print("5- Consultar video más trending para categoría")
+    print("6- Consultar los Top videos por país con tags")
     print("0. Salir")
     
 def initCatalog(input_type_list):
@@ -60,36 +63,51 @@ def loadData(catalog):
     controller.loadData(catalog)
 
 
-# def printAuthorData(author):
-#     if author:
-#         print('Autor encontrado: ' + author['name'])
-#         print('Promedio: ' + str(author['average_rating']))
-#         print('Total de libros: ' + str(lt.size(author['books'])))
-#         for book in lt.iterator(author['books']):
-#             print('Titulo: ' + book['title'] + '  ISBN: ' + book['isbn'])
-#     else:
-#         print('No se encontro el autor')1
-
-
-# def printBestVideos(videos):
-#     size = lt.size(videos)
-#     if size:
-#         print(' Estos son los mejores videos: ')
-#         for videos in lt.iterator(videos):
-#             print('Titulo: ' + videos['title'] + '  ISBN: ' +
-#                   video['isbn'] + ' Rating: ' + video['average_rating'])
-#     else:
-#         print('No se encontraron videos')1
-
-def printResults(ord_videos, sample=10):
+def printTop(ord_videos, sample=10):
     size = lt.size(ord_videos)
-    if size > sample:
+    if size:
         print("Los primeros ", sample, " videos ordenados son:")
         i=0
-        while i <= sample:
+        while i < sample:
             videos = lt.getElement(ord_videos,i)
-            print('Trending date: ' + videos['trending_date'] + ' Title: ' + videos['title']
-                  + ' Channel: ' + videos['channel_title'] + ' Views: ' + videos['views'])
+            print('Trending date: {} ||  Title: {} ||  Channel: {}  ||  Published: {}  ||  Views: {}  ||  Likes: {}  ||  Dislikes: {}'.format(videos['trending_date'],videos['title'],videos['channel_title'],
+                                                       videos['publish_time'],videos['views'],videos['likes'],videos['dislikes']))
+            i+=1
+
+
+def printTopTrendingCountry(ord_videos, sample=10):
+    size = lt.size(ord_videos)
+    if size:
+        i=0
+        while i < sample:
+            videos = lt.getElement(ord_videos,i)
+            trending_days = datetime.datetime.strptime(videos['trending_date'], '%y.%d.%m') - datetime.datetime.strptime(videos['publish_time'], '%Y-%m-%d')
+            print('Title: {} ||  Channel: {}  ||  Country: {}  ||  Trending days: {}'.format(videos['title'],videos['channel_title'],
+                                                       videos['country'],trending_days.days))
+            i+=1
+
+
+def printTopTrendingCategory(ord_videos, sample=10):
+    size = lt.size(ord_videos)
+    if size:
+        i=0
+        while i < sample:
+            videos = lt.getElement(ord_videos,i)
+            trending_days = datetime.datetime.strptime(videos['trending_date'], '%y.%d.%m') - datetime.datetime.strptime(videos['publish_time'], '%Y-%m-%d')
+            print('Title: {} ||  Channel: {}  ||  Category: {}  ||  Trending days: {}'.format(videos['title'],videos['channel_title'],
+                                                       videos['category_id'],trending_days.days))
+            i+=1
+
+
+def printCategoryCountry(videos_selected, sample, category, country):
+    size = lt.size(videos_selected)
+    if size:
+        print('Los mejores ' + str(sample) + ' para la categoría ' + category + ' en ' + country)
+        i=0
+        while i < sample:
+            videos = lt.getElement(videos_selected,i)
+            print('Trending date: {} ||  Title: {} ||  Channel: {}  ||  Published: {}  ||  Views: {}  ||  Likes: {}  ||  Dislikes: {}'.format(videos['trending_date'],videos['title'],videos['channel_title'],
+                                                       videos['publish_time'],videos['views'],videos['likes'],videos['dislikes']))
             i+=1
 
 catalog = None
@@ -101,7 +119,6 @@ while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
-        #input_type_list = input('Tipo de list (ARRAY_LIST o SINGLE_LINKED) \n')
         input_type_list = 'ARRAY_LIST'
         print("Cargando información de los archivos ....")
         catalog = initCatalog(input_type_list)
@@ -110,21 +127,42 @@ while True:
             
     elif int(inputs[0]) == 2:
         number = input("Buscando los TOP ?: ")
-        #input_sort_type = input('Tipo de algoritmo de ordenamiento iterativo (selection, insertion o shell) : ')
         input_sort_type = 'merge'
         sortedVideos = controller.sortVideos(catalog, int(number), str(input_sort_type))
-        print('Para el top ' + str(number) + ' elementos (videos), el tiempo (mseg) es: ' + str(sortedVideos[0]))
-        prin
+        #print('Para el top ' + str(number) + ' elementos (videos), el tiempo (mseg) es: ' + str(sortedVideos[0]))
+        printTop(sortedVideos[1], int(number))
 
     elif int(inputs[0]) == 3:
-        channel_title = input("Nombre del pais a buscar: ")
-        author = controller.getVideosByCountry(catalog, channel_title)
-        printCountryData(author)
+        number = input("Buscando los TOP ?: ")
+        category = input('Categoria: ')
+        country = input('País: ')
+        input_sort_type = 'merge'
+        categoryVideos = controller.getVideosByCategory(catalog, category)
+        countryVideos = controller.getVideosByCountry(categoryVideos, country)
+        sortedVideos = controller.sortVideos(countryVideos, int(number), str(input_sort_type))
+        printCategoryCountry(sortedVideos[1], number, category, country)
 
     elif int(inputs[0]) == 4:
-        category = input("Etiqueta a buscar: ")
-        book_count = controller.getVideosByCategory(catalog, category)
-        print('Se encontraron: ', book_count, ' videos')
+        country = input('País: ')
+        input_sort_type = 'merge'
+        countryVideos = controller.getVideosByCountry(catalog, country)
+        sortedVideosTime = controller.sortVideosTime(countryVideos, int(1), str(input_sort_type))
+        printTopTrendingCountry(sortedVideosTime[1], int(number))
+
+    elif int(inputs[0]) == 5:
+        category = input('Categoria: ')
+        input_sort_type = 'merge'
+        categoryVideos = controller.getVideosByCategory(catalog, category)
+        sortedVideosTime = controller.sortVideosTime(categoryVideos, int(1), str(input_sort_type))
+        printTopTrendingCategory(sortedVideosTime[1], int(number))
+
+    elif int(inputs[0]) == 6:
+        country = input('País: ')
+        tag = input('Tag: ')
+        input_sort_type = 'merge'
+        tagsVideos = controller.getVideosByTags(catalog, tag)
+        sortedVideosLikes = controller.sortVideosLikes(categoryVideos, int(3), str(input_sort_type))
+
 
     else:
         sys.exit(0)

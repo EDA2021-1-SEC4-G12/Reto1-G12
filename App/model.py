@@ -27,6 +27,7 @@
 
 import config as cf
 import time
+import datetime
 from DISClib.ADT import list as lt
 from DISClib.Algorithms.Sorting import selectionsort, insertionsort, shellsort, mergesort, quicksort
 assert cf
@@ -53,10 +54,10 @@ def newCatalog(type_list='SINGLE_LINKED'):
     catalog = {'videos':None,
                'category_id': None}
 
-    catalog['videos'] = lt.newList(type_list,
-                                    cmpfunction=cmpvideoid)
-    catalog['category_id'] = lt.newList(type_list,
-                                    cmpfunction=cmpcategoryid)
+    catalog['videos'] = lt.newList(type_list
+                                    ,cmpfunction=cmpvideoid)
+    catalog['category_id'] = lt.newList(type_list
+                                    ,cmpfunction=cmpcategoryid)
 
     return catalog
 
@@ -73,7 +74,11 @@ def addID(catalog, id):
     """compareratings
     Adiciona un tag a la lista de tags
     """
-    lt.addLast(catalog['category_id'], id)
+    id_ = newID(id['id'],id['name'])
+    lt.addLast(catalog['category_id'], id_)
+
+# def addCategoryID(catalog, video_id):
+#     id_ = newCategoryID(video_id['video'])
 
 # Funciones para creacion de datos
 
@@ -92,10 +97,18 @@ def newID(name, id):
     """
     Esta estructura almancena los tags utilizados para marcar libros.
     """
-    id = {'name': '', 'id': ''}
-    id['name'] = name
-    id['id'] = id
-    return id
+    id_ = {'name': '', 'id': ''}
+    id_['name'] = name
+    id_['id'] = id
+    return id_
+
+
+# def newCategoryID(id_id, video_id):
+#     """
+#     Relacion libros con ID (categoria)
+#     """
+#     categoryid = {'id':id_id, 'video_id':video_id}
+#     return categoryid
 
 # Funciones de consulta
 
@@ -103,21 +116,49 @@ def getVideosByCategory(catalog, category):
     """
     Retorna un autor con sus libros a partir del nombre del autor
     """
-    poscategory = lt.isPresent(catalog['category_id'], category)
-    if poscategory > 0:
-        category_ = lt.getElement(catalog['category_id'], poscategory)
-        return category_
-    return None
+    categories = catalog['category_id']
+    vals_id = []
+    names_id = []
+    for elemt in categories['elements']:
+        vals_id.append(elemt['name'])
+        names_id.append(elemt['id'])
+    dic_decode = dict(zip(names_id,vals_id))
+    #poscategory = lt.isPresent(categories['elements'], category)
+    categoryVideos = lt.newList()
+    #if poscategory > 0:
+    for v_i in range(catalog['videos']['size']):
+        video_i = dict(lt.getElement(catalog['videos'],v_i))
+        if int(video_i['category_id']) == int(dic_decode[category]):
+            lt.addLast(categoryVideos,video_i)
+
+    return categoryVideos
+
 
 def getVideosByCountry(catalog, country):
     """
     Retorna un autor con sus libros a partir del nombre del autor
     """
-    poscountry = lt.isPresent(catalog['country'], country)
-    if poscountry > 0:
-        country_ = lt.getElement(catalog['country'], poscountry)
-        return country_
-    return None
+    countryVideos = lt.newList()
+    for video in lt.iterator(catalog['videos']):
+        video_country = video['country']
+        if video_country == country:
+            lt.addLast(countryVideos,video) 
+    return countryVideos
+
+
+def getVideosByTags(catalog, tag):
+    """
+    Retorna un autor con sus libros a partir del nombre del autor
+    """
+    tagsVideos = lt.newList()
+    for v_i in range(catalog['videos']['size']):
+        video_i = lt.getElement(catalog['videos'],v_i)
+        tags_i = video_i['tags'].split('"|"')
+        if tag in tags_i:
+            lt.addLast(tagsVideos,video_i)
+        
+    return tagsVideos
+
 
 def getBestVideos(catalog, number):
     """
@@ -138,10 +179,8 @@ def cmpvideoid(video1,video2):
         return 0
     return -1
 
-def cmpcategoryid(id1,id2):
-    if (id1.lower() in id2['id'].lower()):
-        return 0
-    return
+def cmpcategoryid(id,category):
+    return (id == category['name'])
 
 
 def cmpVideosByViews(video1,video2):
@@ -152,6 +191,30 @@ def cmpVideosByViews(video1,video2):
         video2: informacion del segundo video que incluye su valor 'views'
     """
     return (float(video1['views']) < float(video2['views']))
+
+def cmpVideosByLikes(video1,video2):
+    """
+    Devuelve verdadero (True) si los 'views' de video1 son menores que los del video2
+    Args:
+        video1: informacion del primer video que incluye su valor 'views'
+        video2: informacion del segundo video que incluye su valor 'views'
+    """
+    return (float(video1['likes']) < float(video2['likes']))
+
+def cmpVideosByTime(video1,video2):
+    """
+    Devuelve verdadero (True) si los 'views' de video1 son menores que los del video2
+    Args:
+        video1: informacion del primer video que incluye su valor 'views'
+        video2: informacion del segundo video que incluye su valor 'views'
+    """
+    time1_b = datetime.datetime.strptime(video1['trending_date'], '%y.%d.%m')
+    time1_a = datetime.datetime.strptime(video1['publish_time'], '%Y-%m-%d')
+    days1 = time1_b-time1_a
+    time2_b = datetime.datetime.strptime(video2['trending_date'], '%y.%d.%m')
+    time2_a = datetime.datetime.strptime(video2['publish_time'], '%Y-%m-%d')
+    days2 = time2_b-time2_a
+    return (days1.days) < (days2.days)
 
 # Funciones de ordenamiento
 
@@ -170,6 +233,49 @@ def sortVideos(catalog, size, sort_type):
         sorted_list = mergesort.sort(sub_list, cmpVideosByViews)
     elif sort_type == 'quick':
         sorted_list = quicksort.sort(sub_list, cmpVideosByViews)
+    else:
+        print('Invalid sorting algorithm, try selection, insertion or shell')
+    stop_time = time.process_time()
+    elapsed_time_mseg = (stop_time - start_time)*1000
+    return elapsed_time_mseg, sorted_list
+
+def sortVideosLikes(catalog, size, sort_type):
+    sub_list = lt.subList(catalog['videos'], 0, size)
+    sub_list = sub_list.copy()
+    start_time = time.process_time()
+    sorted_list = None
+    if sort_type == 'selection':
+        sorted_list = selectionsort.sort(sub_list, cmpVideosByTime)
+    elif sort_type == 'insertion':
+        sorted_list = insertionsort.sort(sub_list, cmpVideosByTime)
+    elif sort_type == 'shell':
+        sorted_list = shellsort.sort(sub_list, cmpVideosByTime)
+    elif sort_type == 'merge':
+        sorted_list = mergesort.sort(sub_list, cmpVideosByTime)
+    elif sort_type == 'quick':
+        sorted_list = quicksort.sort(sub_list, cmpVideosByTime)
+    else:
+        print('Invalid sorting algorithm, try selection, insertion or shell')
+    stop_time = time.process_time()
+    elapsed_time_mseg = (stop_time - start_time)*1000
+    return elapsed_time_mseg, sorted_list
+
+
+def sortVideosTime(catalog, size, sort_type):
+    sub_list = lt.subList(catalog['videos'], 0, size)
+    sub_list = sub_list.copy()
+    start_time = time.process_time()
+    sorted_list = None
+    if sort_type == 'selection':
+        sorted_list = selectionsort.sort(sub_list, cmpVideosByTime)
+    elif sort_type == 'insertion':
+        sorted_list = insertionsort.sort(sub_list, cmpVideosByTime)
+    elif sort_type == 'shell':
+        sorted_list = shellsort.sort(sub_list, cmpVideosByTime)
+    elif sort_type == 'merge':
+        sorted_list = mergesort.sort(sub_list, cmpVideosByTime)
+    elif sort_type == 'quick':
+        sorted_list = quicksort.sort(sub_list, cmpVideosByTime)
     else:
         print('Invalid sorting algorithm, try selection, insertion or shell')
     stop_time = time.process_time()

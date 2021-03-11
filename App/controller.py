@@ -72,23 +72,41 @@ def sortVideos(catalog, size, sort_type):
     """
     return model.sortVideos(catalog, size, sort_type)
 
+def sortVideosTime(catalog, size, sort_type):
+    """
+    Ordena los videos por views
+    """
+    return model.sortVideosTime(catalog, size, sort_type)
+
+def sortVideosLikes(catalog, size, sort_type):
+    """
+    Ordena los videos por views
+    """
+    return model.sortVideosLikes(catalog, size, sort_type)
 
 # Funciones de consulta sobre el catálogo
 
-# def getVideosByCategory(catalog, category):
-#     """
-#     Retrona los videos de una categoria
-#     """
-#     category = model.getVideosByCategory(catalog, category)
-#     return category
+def getVideosByCategory(catalog, category):
+    """
+    Retrona los videos de una categoria
+    """
+    categoryVids = model.getVideosByCategory(catalog, category)
+    return categoryVids
 
 
-# def getVideosByCountry(catalog, country):
-#     """
-#     Retrona los videos de un pais trending
-#     """
-#     country = model.getVideosByCountry(catalog, country)
-#     return country
+def getVideosByCountry(catalog, country):
+    """
+    Retrona los videos de un pais trending
+    """
+    countryVids = model.getVideosByCountry(catalog, country)
+    return countryVids
+
+def getVideosByTags(catalog, tag):
+    """
+    Retrona los videos de un pais trending
+    """
+    tagsVids = model.getVideosByTags(catalog, tag)
+    return tagsVids
 
 
 # def getBestVideos(catalog, number):
