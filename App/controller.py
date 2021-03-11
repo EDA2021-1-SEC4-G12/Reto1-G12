@@ -90,6 +90,10 @@ def sortVideos(catalog, size, sort_type):
 #     country = model.getVideosByCountry(catalog, country)
 #     return country
 
+def getVideosByCountry (catalog, number, country)
+
+    country = model.getVideosByCountry(catalog,number, country)
+    return country
 
 # def getBestVideos(catalog, number):
 #     """
