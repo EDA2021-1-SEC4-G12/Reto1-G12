@@ -72,7 +72,6 @@ def sortVideos(catalog, size, sort_type):
     """
     return model.sortVideos(catalog, size, sort_type)
 
-<<<<<<< HEAD
 def sortVideosTime(catalog, size, sort_type):
     """
     Ordena los videos por views
@@ -108,57 +107,3 @@ def getVideosByTags(catalog, tag):
     """
     tagsVids = model.getVideosByTags(catalog, tag)
     return tagsVids
-
-def getVideosByCountryCat (catalog, country, category):
-
-    count = model.getVideosByCatCoun (catalog, country, category)
-    return count
-
-
-<<<<<<< HEAD
-=======
-=======
-
-# Funciones de consulta sobre el catálogo
-
-# def getVideosByCategory(catalog, category):
-#     """
-#     Retrona los videos de una categoria
-#     """
-#     category = model.getVideosByCategory(catalog, category)
-#     return category
-
-
-# def getVideosByCountry(catalog, country):
-#     """
-#     Retrona los videos de un pais trending
-#     """
-#     country = model.getVideosByCountry(catalog, country)
-#     return country
-
->>>>>>> a4d89b5adc99fbf50e4311c033bf3ca95b653ae1
-def getVideosByCountryCat (catalog, country, category):
-
-    count = model.getVideosByCatCoun (catalog, country, category)
-    return count
-
-
-<<<<<<< HEAD
->>>>>>> a4d89b5adc99fbf50e4311c033bf3ca95b653ae1
-=======
->>>>>>> a4d89b5adc99fbf50e4311c033bf3ca95b653ae1
-def printResult (catalog, numbers):
-    lista = []
-    i = 0
-    while i <=numbers :
-        elemento = lt.getElement(catalog, i)
-        lista.append(elemento)
-        i += 1
-    print(lista)
-
-# def getBestVideos(catalog, number):
-#     """
-#     Retorna los mejores videos
-#     """
-#     bestvideos = model.getBestVideos(catalog, number)
-#     return bestvideos
