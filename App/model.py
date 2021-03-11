@@ -145,6 +145,20 @@ def getBestVideos(catalog, number):
         lt.addLast(bestvideos, video)
     return bestvideos
 
+def getBestVideosCountry (catalog, number, country)
+    size = lt.size(videos_orde)
+    video = catalog['videos']
+    Best = lt.newlist()
+    if size > sample:
+        print("Los primeros ", sample, " videos ordenados son:")
+        i=0
+        while i <= sample:
+            videos = lt.getElement(videos_orde,i)
+            print('Trending date: ' + videos['trending_date'] + ' Title: ' + videos['title']
+                  + ' Channel: ' + videos['channel_title'] + 'publich time: ' + videos['publish_time'] + ' Views: ' + videos['views'] + 'likes: ' + videos['likes'] + 'dislikes: ' + videos['dislikes'])
+            i+=1
+            lt.addLast(Best,video)
+    return Best
 
 # Funciones utilizadas para comparar elementos dentro de una lista
 
