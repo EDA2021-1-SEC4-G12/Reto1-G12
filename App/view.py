@@ -73,6 +73,7 @@ def printTop(ord_videos, sample=10):
             print('Trending date: {} ||  Title: {} ||  Channel: {}  ||  Published: {}  ||  Views: {}  ||  Likes: {}  ||  Dislikes: {}'.format(videos['trending_date'],videos['title'],videos['channel_title'],
                                                        videos['publish_time'],videos['views'],videos['likes'],videos['dislikes']))
             i+=1
+    return printResults
 
 
 def printTopTrendingCountry(ord_videos, sample=10):

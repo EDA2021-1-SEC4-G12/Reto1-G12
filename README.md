@@ -2,7 +2,9 @@
 
 #Integrante (REALIZADO SOLO POR SAMUEL TORRES)
 
-Req 1,2,3,4 - Samuel Torres, 201632770, s.torresf@uniandes.edu.co
+Req 1,2,3 - Samuel Torres, 201632770, s.torresf@uniandes.edu.co
+
+## Utilicé los datos -10.csv
 
 Este proyecto contiene los Tipos abstractos de datos, estructuras de datos y algoritmos requeridos por el curso ISIS1225-Estructuras de Datos y Algoritmos
 
